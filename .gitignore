@@ -1,0 +1,3 @@
+# ignore compilation files
+test_jpeg_yolov3
+test_video_yolov3
