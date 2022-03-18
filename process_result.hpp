@@ -25,7 +25,7 @@
  */
 // static cv::Scalar hsvToRgb(h, s, v){
 
-static const char *labels[] = {"Worker", "Worker (only helmet)", "Worker (only vest)", "Worker (helmet & Vest)"};
+static const char *labels[] = {"Worker", "Worker + Helmet", "Worker + Vest", "Worker + Helmet + Vest"};
 static const cv::Scalar clrs[] = {cv::Scalar(183, 123, 21), cv::Scalar(127, 255, 0), cv::Scalar(0, 255, 255), cv::Scalar(127, 0, 255)};
 
 static cv::Scalar getColor(int label)
@@ -42,29 +42,42 @@ static cv::Mat process_result(cv::Mat &image,
                               const vitis::ai::YOLOv3Result &result,
                               bool is_jpeg)
 {
-  for (const auto bbox : result.bboxes)
+  for (int i = 0; i < result.bboxes.size(); i++)
   {
-    int label = bbox.label;
-    float xmin = bbox.x * image.cols + 1;
-    float ymin = bbox.y * image.rows + 1;
-    float xmax = xmin + bbox.width * image.cols;
-    float ymax = ymin + bbox.height * image.rows;
-    float confidence = bbox.score;
-    // text_color= cv::Scalar(255, 255, 255);
+    bool is_duplicate = false;
+    for (int j = i + 1; j < result.bboxes.size(); j++)
+    {
+      if (result.bboxes[i].x == result.bboxes[j].x && result.bboxes[i].y == result.bboxes[j].y){
+        is_duplicate = true;
+        break;
+      }
+        
+    }
+    if (!is_duplicate)
+    {
+      int label = result.bboxes[i].label;
+      float xmin = result.bboxes[i].x * image.cols + 1;
+      float ymin = result.bboxes[i].y * image.rows + 1;
+      float xmax = xmin + result.bboxes[i].width * image.cols;
+      float ymax = ymin + result.bboxes[i].height * image.rows;
+      float confidence = result.bboxes[i].score;
 
-    if (xmax > image.cols)
-      xmax = image.cols;
-    if (ymax > image.rows)
-      ymax = image.rows;
-    LOG_IF(INFO, is_jpeg) << "RESULT: " << label << "\t" << xmin << "\t" << ymin
-                          << "\t" << xmax << "\t" << ymax << "\t" << confidence
-                          << "\n";
-    cv::rectangle(image, cv::Point(xmin, ymin), cv::Point(xmax, ymax), clrs[label], 2, 1, 0);
-    cv::rectangle(image, cv::Point(xmin, ymin), cv::Point(xmax, ymin + 20), clrs[label], -1);
-    cv::putText(image, labels[label], cv::Point(xmin, ymin + 15), cv::FONT_HERSHEY_DUPLEX, 0.5, cv::Scalar(255, 255, 255));
-    cv::putText(image, std::to_string(int(confidence * 100)) +" %", cv::Point(xmax-50, ymin + 35), cv::FONT_HERSHEY_DUPLEX, 0.5, clrs[label]);
+      if (xmax > image.cols)
+        xmax = image.cols;
+      if (ymax > image.rows)
+        ymax = image.rows;
+
+      LOG_IF(INFO, is_jpeg) << "RESULT: " << label << "\t" << xmin << "\t" << ymin
+                            << "\t" << xmax << "\t" << ymax << "\t" << confidence
+                            << "\n";
+
+      cv::rectangle(image, cv::Point(xmin, ymin), cv::Point(xmax, ymax), clrs[label], 2, 1, 0);
+      cv::rectangle(image, cv::Point(xmin, ymin), cv::Point(xmax, ymin + 20), clrs[label], -1);
+      cv::putText(image, labels[label], cv::Point(xmin, ymin + 15), cv::FONT_HERSHEY_DUPLEX, 0.5, cv::Scalar(255, 255, 255));
+      cv::putText(image, std::to_string(int(confidence * 100)) + " %", cv::Point(xmax - 50, ymin + 35), cv::FONT_HERSHEY_DUPLEX, 0.5, clrs[label]);
+    }
   }
   if (is_jpeg)
-  	cv::imwrite("/home/petalinux/result.jpg",image);
+    cv::imwrite("/home/petalinux/result.jpg", image);
   return image;
 }
