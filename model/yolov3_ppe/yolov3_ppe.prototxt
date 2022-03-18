@@ -1,0 +1,42 @@
+model {
+  name: "yolov3_416x416_ppe"
+  kernel {
+     name: "yolov3_416x416_ppe"
+     mean: 0.0
+     mean: 0.0
+     mean: 0.0
+     scale: 0.00390625
+     scale: 0.00390625
+     scale: 0.00390625
+  }
+  model_type : YOLOv3
+  yolo_v3_param {
+    num_classes: 4
+    anchorCnt: 3
+    layer_name: "58"
+    layer_name: "66"
+    layer_name: "74"
+    conf_threshold: 0.5
+    nms_threshold: 0.45
+    biases: 6
+    biases: 11
+    biases: 11
+    biases: 23
+    biases: 19
+    biases: 36
+    biases: 32
+    biases: 50
+    biases: 40
+    biases: 104
+    biases: 76
+    biases: 73
+    biases: 73
+    biases: 158
+    biases: 128
+    biases: 209
+    biases: 224
+    biases: 246
+    test_mAP: false
+  }
+  is_tf : true
+}
