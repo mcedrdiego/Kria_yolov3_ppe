@@ -25,7 +25,7 @@ For jpeg
 ```
 Where *MODEL_NAME* is the model prefix name. (**yolov3_ppe** in our case)
 
-## Credits
+### Credits
 [**Deep Learning for Site Safety: Real-Time Detection of Personal Protective Equipment**](https://www.sciencedirect.com/science/article/pii/S0926580519308325) \
 Nipun D. Nath, Amir H. Behzadan, Stephanie G. Paal \
 Automation in Construction 112, pp. 103085
@@ -33,6 +33,7 @@ Automation in Construction 112, pp. 103085
 [**Xilinx Vitis AI**](https://github.com/Xilinx/Vitis-AI)<br>
 Viti-Ai-Library yolov3 samples
 
+### Contributors
 <a href="https://github.com/mcedrdiego/Kria_yolov3_ppe/graphs/contributors">
    <img src="https://contrib.rocks/image?repo=mcedrdiego/Kria_yolov3_ppe" />
 </a>
