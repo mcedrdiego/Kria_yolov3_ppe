@@ -32,3 +32,9 @@ Automation in Construction 112, pp. 103085
 
 [**Xilinx Vitis AI**](https://github.com/Xilinx/Vitis-AI)<br>
 Viti-Ai-Library yolov3 samples
+
+<a href="https://github.com/mcedrdiego/Kria_yolov3_ppe/graphs/contributors">
+   <img src="https://contrib.rocks/image?repo=mcedrdiego/Kria_yolov3_ppe" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
