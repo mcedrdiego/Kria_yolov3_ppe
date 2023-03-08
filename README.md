@@ -1,6 +1,9 @@
 # Kria KV260 Real-Time Personal Protective Equipment Detection
+
 This project is a modified version of samples from [Vitis-AI-Library](https://github.com/Xilinx/Vitis-AI/tree/master/demo/Vitis-AI-Library/samples/yolov3)
+
 <img src='./media/result.jpg' alt="Result Image" width=416/>
+
 ## Model
 Copy and paste the model to *"/usr/share/vitis_ai_library/models/"*
 
@@ -33,9 +36,3 @@ Automation in Construction 112, pp. 103085
 [**Xilinx Vitis AI**](https://github.com/Xilinx/Vitis-AI)<br>
 Viti-Ai-Library yolov3 samples
 
-### Contributors
-<a href="https://github.com/mcedrdiego/Kria_yolov3_ppe/graphs/contributors">
-   <img src="https://contrib.rocks/image?repo=mcedrdiego/Kria_yolov3_ppe" />
-</a>
-
-Made with [contrib.rocks](https://contrib.rocks).
